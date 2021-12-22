@@ -9,7 +9,7 @@ All credits for the codebase go to [jacobgil](https://github.com/jacobgil) for p
 I slightly modified the code.
 The loss function changed from the original
 ```
-loss_fn=l1_coeff*tf.reduce_mean(tf.math.abs(1-mask))+outputs[0, category.numpy()[0]]+tv_coeff*total_grad
+loss_fn=l1_coeff*tf.reduce_mean(tf.math.abs(1-mask))+outputs[0, category.numpy()[0]]*tv_coeff*total_grad
 ```
 to
 ```
@@ -26,7 +26,26 @@ then the explanations of the image will be stored in the result folder.
 explain(img_path)
 ```
 
+# Experiment
 
+When I experimented with the setting which is original setting
+```
+loss_fn=l1_coeff*tf.reduce_mean(tf.math.abs(1-mask))+outputs[0, category.numpy()[0]]*tv_coeff*(total_grad+0.01)
+
+l1_coeff=0.01 # Non-trainable
+tv_coeff=0.2 # Non-trainable
+```
+I got the following result;
+![excution image](./result/cam_t.png)
+It looks clean, but I found that it is unstable and dependent on the data, coefficients when I used another data like bicycle, flute.
+
+So I tried to make coefficients trainable for stability and modified the loss function.
+With modified settings (trainable coefficients and loss function),
+I got the following result;
+![excution image](./result/catdog_cam.png)
+It doesn't look clean, but it is more stable, which means that it is not highly dependent on coefficients and image.
+
+By modifying the loss function and some settings, you can enjoy.
 
 # Reference
 If you found this library useful in your research, please consider citing
