@@ -8,14 +8,6 @@ import tensorflow as tf
 import cv2 as cv
 import matplotlib.pyplot as plt
 
-def tv_norm(input, tv_beta):
-    img=input[0, :, :, 0]
-    row_diff=tf.abs(img[:-1, :]-img[1:, :])
-    col_diff=tf.abs(img[:, :-1]-img[:, 1:])
-    row_grad=tf.reduce_mean(tf.pow(row_diff, tv_beta))
-    col_grad=tf.reduce_mean(tf.pow(col_diff, tv_beta))
-    total_grad=tf.Variable(row_grad+col_grad)
-    return total_grad
 
 def preprocess_image(img):
     means=tf.constant([[[0.485, 0.456, 0.406]]], dtype=tf.float32)
