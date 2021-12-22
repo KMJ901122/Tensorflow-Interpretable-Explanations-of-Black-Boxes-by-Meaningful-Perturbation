@@ -36,13 +36,16 @@ l1_coeff=0.01 # Non-trainable
 tv_coeff=0.2 # Non-trainable
 ```
 I got the following result;
+
 ![excution image](./result/cam_t.png)
 
 It looks clean, but I found that it is unstable and dependent on the data, coefficients when I used another data like bicycle, flute.
 
 So I tried to make coefficients trainable for stability and modified the loss function.
 With modified settings (trainable coefficients and loss function),
+
 I got the following result;
+
 ![excution image](./result/catdog_cam.png)
 
 It doesn't look clean, but it is more stable, which means that it is not highly dependent on coefficients and image.
