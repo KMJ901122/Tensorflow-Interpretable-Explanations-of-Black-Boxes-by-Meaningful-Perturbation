@@ -28,7 +28,7 @@ explain(img_path)
 
 # Experiment
 
-When I experimented with the setting which is original setting
+When I experimented with the setting which is original.
 ```
 loss_fn=l1_coeff*tf.reduce_mean(tf.math.abs(1-mask))+outputs[0, category.numpy()[0]]*tv_coeff*(total_grad+0.01)
 
@@ -50,7 +50,12 @@ I got the following result;
 
 It doesn't look clean, but it is more stable, which means that it is not highly dependent on coefficients and image.
 
-By modifying the loss function and some settings, you can enjoy.
+Actually, the model doesn't seem to catch completely meaningful explanation on images.
+I am not sure what the reason is. It may be because the pretrained model is trained on different scaled images (different normalization techniques or with some noises).
+Anyway, the model found a bit, not perfectly acceptable, reasonable explanations.
+I think there are room for improvement by modifying some settings and loss functions.
+
+Hope you can enjoy with your own experiments.
 
 # Reference
 If you found this library useful in your research, please consider citing
