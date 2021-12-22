@@ -28,7 +28,7 @@ def preprocess_image(img):
     return tf.Variable(preprocessed_img, trainable=False)
 
 def save(mask, img, blurred, img_name):
-    print(current_dir)
+
     mask=tf.divide(tf.subtract(mask, tf.reduce_min(mask)), tf.reduce_max(mask))
     mask=1-mask
     mask=mask[0]
@@ -40,8 +40,7 @@ def save(mask, img, blurred, img_name):
     img=np.float32(img)/255
     perturbated=np.multiply(1-mask, img)+np.multiply(mask, blurred)
     perturbated=perturbated
-    # save_path=current_dir+'\result'+'\\'+img_name+'_perturbated.png'
-    # print(save_path)
+
     cv.imwrite(current_dir+'\\result'+'\\'+img_name+'_perturbated.png', np.uint8(255*perturbated))
     cv.imwrite(current_dir+'\\result'+'\\'+img_name+'_heatmap.png', np.uint8(255*heatmap))
     cv.imwrite(current_dir+'\\result'+'\\'+img_name+'_mask.png', np.uint8(255*mask))
@@ -66,7 +65,7 @@ def explain(img_path):
     tv_beta=3
     learning_rate=0.1
     max_iterations=500
-    l1_coeff=tf.Variable(0.01)
+    l1_coeff=tf.Variable(1.)
     tv_coeff=tf.Variable(1.)
 
     model=load_model()
@@ -127,7 +126,7 @@ def explain(img_path):
 
 if __name__=='__main__':
     img_list=['bicycle', 'catdog', 'flute', 'tusker']
-    for x in img_list:
+    for x in img_list[:2]:
         img_name=x
         img_path=current_dir+'\images'+'\\'+img_name+'.png'
         explain(img_path)
