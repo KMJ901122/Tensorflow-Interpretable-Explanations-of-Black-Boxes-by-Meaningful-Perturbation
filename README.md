@@ -1,6 +1,7 @@
 # Tensorflow Interpretable Explanations of Black Boxes by Meaningful Perturbation
 
-I haven't found any Tensorflow code for the paper. So, I do it.
+I couldn't find any Tensorflow code for the paper. So, I do it.
+To the best of my knowledge, this is the first code for the paper written by Tensorflow.
 
 A library built to replicate the [Pytorch-explain-black-box](https://github.com/jacobgil/pytorch-explain-black-box) library built for the [Interpretable Explanations of Black Boxes by Meaningful Perturbation by Ruth at el](https://arxiv.org/abs/1704.03296), running entirely on Tensorflow Eager Execution.
 
